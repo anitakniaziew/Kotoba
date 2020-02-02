@@ -12,7 +12,8 @@ class App extends React.Component {
       currentWord: this.drawWord()
     }
     this.handleChange = this.handleChange.bind(this);
-    this.compareValue = this.compareValue.bind(this)
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.compareValue = this.compareValue.bind(this);
   }
 
   drawWord() {
@@ -23,6 +24,12 @@ class App extends React.Component {
 
   handleChange(event) {
     this.setState({answer: event.target.value});
+  }
+
+  handleKeyPress(event) {
+    if (event.key === "Enter") {
+      this.compareValue()
+    }
   }
 
   endList() {
@@ -51,7 +58,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <p>{this.state.currentWord.PL}</p>
-        <input id="userAnswer" value={this.state.answer} type="text" onChange={this.handleChange}></input>
+        <input id="userAnswer" value={this.state.answer} type="text" onChange={this.handleChange} onKeyPress={this.handleKeyPress}></input>
         <button onClick={this.compareValue}>ZATWIERDŹ</button>
       </div>
     );
