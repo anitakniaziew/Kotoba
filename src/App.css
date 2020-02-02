@@ -1,5 +1,4 @@
 .App {
-  text-align: center;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -9,11 +8,13 @@
 }
 
 p {
+  text-align: center;
   font-size: 32px;
   text-transform: uppercase;
 }
 
 input, button {
+  text-align: center;
   border: 1px solid darkblue;
   margin: 10px;
   padding: 15px;
