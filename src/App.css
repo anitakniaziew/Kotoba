@@ -47,6 +47,6 @@ input, button {
   text-transform: uppercase;
 }
 
-input:focus {
+input:focus, button:focus {
   outline: none;
 }
