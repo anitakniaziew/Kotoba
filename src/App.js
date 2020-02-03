@@ -9,6 +9,7 @@ class App extends React.Component {
     this.wordsList = [...dict];
     this.state = {
       lang: "PL",
+      answerLang: "JP",
       answer: "",
       currentWord: this.drawWord()
     };
@@ -39,14 +40,12 @@ class App extends React.Component {
   }
 
   compareValue() {
-    if (this.endList()) {
-      console.log("There is no more words to learn");
-    } else {
-      this.state.answer === this.state.currentWord.JP
-        ? console.log("Y")
-        : console.log("N");
-      this.drawNext();
-    }
+    this.state.answer === this.state.currentWord[this.state.answerLang]
+      ? console.log("Y")
+      : console.log("N");
+    this.endList()
+      ? console.log("There is no more words to learn")
+      : this.drawNext();
   }
 
   drawNext() {
@@ -58,8 +57,8 @@ class App extends React.Component {
 
   toggleLang() {
     this.state.lang === "PL"
-      ? this.setState({ lang: "JP" })
-      : this.setState({ lang: "PL" });
+      ? this.setState({ lang: "JP", answerLang: "PL" })
+      : this.setState({ lang: "PL", answerLang: "JP" });
   }
 
   render() {
