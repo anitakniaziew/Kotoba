@@ -39,13 +39,21 @@ class App extends React.Component {
     return this.wordsList.length === 0;
   }
 
+  startNewRound() {
+    this.wordsList = [...dict];
+    this.setState({
+      lang: "PL",
+      answerLang: "JP",
+      answer: "",
+      currentWord: this.drawWord()
+    });
+  }
+
   compareValue() {
     this.state.answer === this.state.currentWord[this.state.answerLang]
       ? console.log("Y")
       : console.log("N");
-    this.endList()
-      ? console.log("There is no more words to learn")
-      : this.drawNext();
+    this.endList() ? this.startNewRound() : this.drawNext();
   }
 
   drawNext() {
