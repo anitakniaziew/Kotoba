@@ -8,12 +8,14 @@ class App extends React.Component {
     super(props);
     this.wordsList = [...dict];
     this.state = {
+      lang: "PL",
       answer: "",
       currentWord: this.drawWord()
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.compareValue = this.compareValue.bind(this);
+    this.toggleLang = this.toggleLang.bind(this);
   }
 
   drawWord() {
@@ -54,10 +56,19 @@ class App extends React.Component {
     });
   }
 
+  toggleLang() {
+    this.state.lang === "PL"
+      ? this.setState({ lang: "JP" })
+      : this.setState({ lang: "PL" });
+  }
+
   render() {
     return (
       <div className="App">
-        <p>{this.state.currentWord.PL}</p>
+        <button className="lang" onClick={this.toggleLang}>
+          {this.state.lang}
+        </button>
+        <p>{this.state.currentWord[this.state.lang]}</p>
         <input
           id="userAnswer"
           value={this.state.answer}

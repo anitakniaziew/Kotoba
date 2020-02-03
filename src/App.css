@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .App {
   margin: 0 auto;
   display: flex;
@@ -13,11 +17,36 @@ p {
   text-transform: uppercase;
 }
 
+.lang {
+  height: 52px;
+  width: 52px;
+  font-size: 18px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  border: 2px solid palevioletred;
+  border-radius: 50%;
+}
+
+button {
+  background-color: lightpink;
+  color: white;
+}
+
+p, input {
+  color: palevioletred;
+}
+
 input, button {
   text-align: center;
-  border: 1px solid darkblue;
+  border: 2px solid palevioletred;
+  border-radius: 10px;
   margin: 10px;
   padding: 15px;
   font-size: 28px;
   text-transform: uppercase;
+}
+
+input:focus {
+  outline: none;
 }
