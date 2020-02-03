@@ -62,6 +62,7 @@ class App extends React.Component {
           id="userAnswer"
           value={this.state.answer}
           type="text"
+          autoComplete="off"
           onChange={this.handleChange}
           onKeyPress={this.handleKeyPress}
         />
