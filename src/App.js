@@ -67,6 +67,7 @@ class App extends React.Component {
     this.state.lang === "PL"
       ? this.setState({ lang: "JP", answerLang: "PL" })
       : this.setState({ lang: "PL", answerLang: "JP" });
+    this.drawNext();
   }
 
   render() {
