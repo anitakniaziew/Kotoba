@@ -1,0 +1,64 @@
+openapi: 3.0.0
+info:
+  title: kotoba-api
+  version: '1.0'
+  description: API serving the Japanese language learning app Kotoba
+  license:
+    name: MIT
+  contact:
+    name: Anita Kowalska
+    url: 'https://github.com/anitakniaziew'
+servers:
+  - url: 'http://localhost:3000'
+    description: Local Development
+tags:
+  - name: learning
+    description: Endpoints used for learning
+paths:
+  /phrases:
+    get:
+      summary: Fetch Phrases to Learn
+      tags:
+        - learning
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      description: A single phrase
+                      properties:
+                        PL:
+                          type: string
+                          description: Polish translation
+                        JP:
+                          type: string
+                          description: Japanese translation
+                      required:
+                        - PL
+                        - JP
+                  meta:
+                    type: object
+                    required:
+                      - total
+                    description: Metadata describing the collection
+                    properties:
+                      total:
+                        type: integer
+                        minimum: 0
+                        description: Number of total words to learn
+                required:
+                  - data
+                  - meta
+              examples: {}
+      operationId: get-phrases
+      description: Returns the next phrases to learn based on the learning optimization algorithm.
+components:
+  schemas: {}
+  securitySchemes: {}
