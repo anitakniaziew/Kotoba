@@ -9,8 +9,8 @@ info:
     name: Anita Kowalska
     url: 'https://github.com/anitakniaziew'
 servers:
-  - url: 'http://localhost:3000'
-    description: Local Development
+  - url: 'https://europe-west2-kotoba-c36b8.cloudfunctions.net'
+    description: Production
 tags:
   - name: learning
     description: Endpoints used for learning
