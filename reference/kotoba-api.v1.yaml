@@ -15,7 +15,7 @@ tags:
   - name: learning
     description: Endpoints used for learning
 paths:
-  /phrases:
+  /phrasesToLearn:
     get:
       summary: Fetch Phrases to Learn
       tags:
@@ -59,6 +59,7 @@ paths:
               examples: {}
       operationId: get-phrases
       description: Returns the next phrases to learn based on the learning optimization algorithm.
+    parameters: []
 components:
   schemas: {}
   securitySchemes: {}
