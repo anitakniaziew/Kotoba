@@ -1,17 +1,15 @@
 import React from "react";
 import "./App.css";
 
-import dict from "./dict";
-
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.wordsList = [...dict];
+    this.wordsList = [];
     this.state = {
       lang: "PL",
       answerLang: "JP",
       answer: "",
-      currentWord: this.drawWord()
+      currentWord: null
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -19,8 +17,24 @@ class App extends React.Component {
     this.toggleLang = this.toggleLang.bind(this);
   }
 
+  loadWords() {
+    fetch("https://europe-west2-kotoba-c36b8.cloudfunctions.net/phrasesToLearn")
+      .then(response => response.json())
+      .then(response => {
+        this.wordsList = response.data;
+        this.setState({
+          currentWord: this.drawWord()
+        });
+      })
+      .catch(err => console.log(err));
+  }
+
+  componentDidMount() {
+    this.loadWords();
+  }
+
   drawWord() {
-    if (this.endList()) this.wordsList = [...dict];
+    if (this.endList()) this.loadWords();
     const index = Math.floor(Math.random() * this.wordsList.length);
     let [word] = this.wordsList.splice(index, 1);
     return word;
@@ -68,7 +82,11 @@ class App extends React.Component {
         <button className="lang" onClick={this.toggleLang}>
           {this.state.lang}
         </button>
-        <p>{this.state.currentWord[this.state.lang]}</p>
+        <p>
+          {!this.state.currentWord
+            ? "Loading word..."
+            : this.state.currentWord[this.state.lang]}
+        </p>
         <input
           autoFocus
           id="userAnswer"
