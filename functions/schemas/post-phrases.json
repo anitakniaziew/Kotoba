@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "POST /phrases",
+  "description": "Describes payload for adding phrases to database",
+  "type": "object",
+  "properties": {
+    "data": {
+      "description": "A list of phrases to add",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "JP": {
+            "type": "string"
+          },
+          "PL": {
+            "type": "string"
+          }
+        },
+        "required": ["JP", "PL"]
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    }
+  },
+  "required": ["data"]
+}
