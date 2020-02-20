@@ -20,6 +20,7 @@ class App extends React.Component {
   }
 
   drawWord() {
+    if (this.endList()) this.wordsList = [...dict];
     const index = Math.floor(Math.random() * this.wordsList.length);
     let [word] = this.wordsList.splice(index, 1);
     return word;
@@ -39,21 +40,11 @@ class App extends React.Component {
     return this.wordsList.length === 0;
   }
 
-  startNewRound() {
-    this.wordsList = [...dict];
-    this.setState({
-      lang: "PL",
-      answerLang: "JP",
-      answer: "",
-      currentWord: this.drawWord()
-    });
-  }
-
   compareValue() {
     this.state.answer === this.state.currentWord[this.state.answerLang]
       ? console.log("Y")
       : console.log("N");
-    this.endList() ? this.startNewRound() : this.drawNext();
+    this.drawNext();
   }
 
   drawNext() {
@@ -68,6 +59,7 @@ class App extends React.Component {
       ? this.setState({ lang: "JP", answerLang: "PL" })
       : this.setState({ lang: "PL", answerLang: "JP" });
     this.drawNext();
+    // document.getElementById("userAnswer").focus();
   }
 
   render() {
@@ -78,6 +70,7 @@ class App extends React.Component {
         </button>
         <p>{this.state.currentWord[this.state.lang]}</p>
         <input
+          autoFocus
           id="userAnswer"
           value={this.state.answer}
           type="text"
