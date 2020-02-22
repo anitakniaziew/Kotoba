@@ -1,0 +1,23 @@
+.App {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-self: center;
+  margin: 0 auto;
+  width: 50%;
+}
+
+input {
+  width: 30%;
+  font-size: 20px;
+}
+
+.Add{
+  width: 20%;
+  margin: 0 auto;
+  font-size: 20px;
+}
