@@ -16,6 +16,10 @@ input {
   font-size: 20px;
 }
 
+.error {
+  border: 2px solid red;
+}
+
 .Add{
   width: 20%;
   margin: 0 auto;

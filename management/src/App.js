@@ -8,6 +8,7 @@ class App extends React.Component {
     this.dict = [];
     this.state = {
       inputDisabled: false,
+      inputErr: false,
       JP: "",
       PL: ""
     };
@@ -18,7 +19,7 @@ class App extends React.Component {
   handleChange(event) {
     const target = event.target;
     const name = target.name;
-    this.setState({ [name]: target.value });
+    this.setState({ [name]: target.value, inputErr: false });
   }
 
   async addWords() {
@@ -34,7 +35,7 @@ class App extends React.Component {
         }
       ]
     });
-    await fetch(
+    const res = await fetch(
       "https://europe-west2-kotoba-c36b8.cloudfunctions.net/phrases",
       {
         method: "POST",
@@ -49,6 +50,11 @@ class App extends React.Component {
       JP: "",
       PL: ""
     });
+    if (!res.ok) {
+      this.setState({
+        inputErr: true
+      });
+    }
   }
 
   render() {
@@ -56,6 +62,7 @@ class App extends React.Component {
       <div className="App">
         <h1>Kotoba words</h1>
         <Inputs
+          className={this.state.inputErr ? "error" : null}
           name="JP"
           placeholder="JP"
           value={this.state.JP}
@@ -63,6 +70,7 @@ class App extends React.Component {
           disabled={this.state.inputDisabled}
         />
         <Inputs
+          className={this.state.inputErr ? "error" : null}
           name="PL"
           placeholder="PL"
           value={this.state.PL}
