@@ -11,10 +11,12 @@
         "type": "object",
         "properties": {
           "JP": {
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           },
           "PL": {
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           }
         },
         "required": ["JP", "PL"]
