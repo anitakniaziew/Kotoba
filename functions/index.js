@@ -33,7 +33,20 @@ exports.phrases = https.onRequest(async (req, res) => {
         res.status(422).send({ errors: ajv.errors });
       } else {
         const collection = admin.firestore().collection("phrases");
-        await Promise.all(req.body.data.map(phrase => collection.add(phrase)));
+
+        await Promise.all(
+          req.body.data.map(async phrase => {
+            const snapshot = await collection
+              .where("JP", "==", phrase.JP)
+              .where("PL", "==", phrase.PL)
+              .get();
+
+            if (snapshot.empty) {
+              collection.add(phrase);
+            }
+          })
+        );
+
         res.sendStatus(201);
       }
     } else {
