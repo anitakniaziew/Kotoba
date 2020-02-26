@@ -104,31 +104,35 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <h1>Kotoba words</h1>
+        <button id="log-out" onClick={() => firebase.auth().signOut()}>
+          Wyloguj
+        </button>
+        <header>Kotoba words</header>
         {!this.state.currentUser ? (
           <StyledFirebaseAuth
             uiConfig={this.uiConfig}
             firebaseAuth={firebase.auth()}
           />
         ) : (
-          <div>
-            <Inputs
-              className={this.state.inputErr ? "error" : null}
-              name="JP"
-              placeholder="JP"
-              value={this.state.JP}
-              onChange={this.handleChange}
-              disabled={this.state.inputDisabled}
-            />
-            <Inputs
-              className={this.state.inputErr ? "error" : null}
-              name="PL"
-              placeholder="PL"
-              value={this.state.PL}
-              onChange={this.handleChange}
-              disabled={this.state.inputDisabled}
-            />
-            <br />
+          <div className="form">
+            <div className="form-inputs">
+              <Inputs
+                className={this.state.inputErr ? "error" : null}
+                name="JP"
+                placeholder="JP"
+                value={this.state.JP}
+                onChange={this.handleChange}
+                disabled={this.state.inputDisabled}
+              />
+              <Inputs
+                className={this.state.inputErr ? "error" : null}
+                name="PL"
+                placeholder="PL"
+                value={this.state.PL}
+                onChange={this.handleChange}
+                disabled={this.state.inputDisabled}
+              />
+            </div>
             <button
               className="Add"
               onClick={this.addWords}
@@ -136,7 +140,6 @@ class App extends React.Component {
             >
               Dodaj słowa
             </button>
-            <button onClick={() => firebase.auth().signOut()}>Wyloguj</button>
           </div>
         )}
       </div>

@@ -1,27 +1,96 @@
-.App {
-  text-align: center;
+* {
+  padding: 0;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+  color: #373737;
 }
 
-form {
+body {
+  background: url("./golden-pavilion.jpg") no-repeat fixed center;
+  background-size: 100vw;
+  height: 100%;
+}
+
+.App {
+  text-align: center;
+  margin: 0 auto
+}
+
+header {
+  font-size: 30px;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.5em;
+  background-color: rgba(222, 224, 222, 0.8);
+  margin: 60px 0;
+  padding: 10px;
+  color: #373737;
+}
+
+.form {
+  margin: 0 auto;
+  background-color: rgba(222, 224, 222, 0.8);
+  width: 50%;
+  height: 70%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  justify-self: center;
-  margin: 0 auto;
-  width: 50%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form, button {
+  border-radius: 4px;
+}
+
+.form-inputs {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
 }
 
 input {
-  width: 30%;
+  width: 40%;
   font-size: 20px;
+  padding: 10px;
+  margin: 50px 0;
+  border: 1px solid rgb(192, 172, 104);
+
 }
 
-.error {
-  border: 2px solid red;
+input:focus, button:focus {
+  outline: 3px solid rgb(192, 172, 104);
+}
+
+button {
+  background-color: #C0B283;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: 1px solid rgb(192, 172, 104);
+  color: #f4f4f4;
 }
 
 .Add{
-  width: 20%;
-  margin: 0 auto;
+  width: 35%;
   font-size: 20px;
+  padding: 20px;
+  margin: 40px;
+  letter-spacing: 0.3em;
+}
+
+
+#log-out {
+  width: 5%;
+  padding: 5px;
+  letter-spacing: 0.1em;
+  border: 1px solid rgb(192, 172, 104);
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+
+.error {
+  outline: 3px solid tomato
 }
