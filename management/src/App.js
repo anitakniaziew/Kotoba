@@ -33,7 +33,7 @@ class App extends React.Component {
     this.addWords = this.addWords.bind(this);
     this.uiConfig = {
       signInFlow: "popup",
-      signInOptions: [firebase.auth.EmailAuthProvider.PROVIDER_ID],
+      signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
       callbacks: {
         signInSuccessWithAuthResult: this.onLogIn.bind(this)
       }
