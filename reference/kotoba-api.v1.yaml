@@ -94,6 +94,42 @@ paths:
                       - JP
               required:
                 - data
+  /answers:
+    post:
+      summary: Send answers
+      tags:
+        - learning
+      responses:
+        '202':
+          description: Accepted
+      operationId: post-answers
+      description: Allows to send a batch of answers for statistical purposes and calculating learning intervals.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      question:
+                        type: string
+                        description: The phrase in question
+                      answer:
+                        type: string
+                        description: User answer
+                      language:
+                        type: string
+                        description: Language of the phrase in question
+                        enum:
+                          - PL
+                          - JP
+                    required:
+                      - question
+                      - answer
 components:
   schemas: {}
   securitySchemes: {}
