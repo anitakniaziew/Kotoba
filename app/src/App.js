@@ -18,7 +18,9 @@ class App extends React.Component {
   }
 
   loadWords() {
-    fetch("https://europe-west2-kotoba-c36b8.cloudfunctions.net/phrasesToLearn")
+    fetch(
+      "https://europe-west2-kotoba-c36b8.cloudfunctions.net/kotoba/phrasesToLearn"
+    )
       .then(response => response.json())
       .then(response => {
         this.wordsList = response.data;

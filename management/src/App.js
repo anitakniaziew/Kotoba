@@ -84,7 +84,7 @@ class App extends React.Component {
     });
     const idToken = await this.state.currentUser.getIdToken();
     const res = await fetch(
-      "https://europe-west2-kotoba-c36b8.cloudfunctions.net/phrases",
+      "https://europe-west2-kotoba-c36b8.cloudfunctions.net/kotoba/phrases",
       {
         method: "POST",
         headers: {
