@@ -31,6 +31,7 @@ class App extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.addWords = this.addWords.bind(this);
+    this.handleKeyEvent = this.handleKeyEvent.bind(this);
     this.uiConfig = {
       signInFlow: "popup",
       signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
@@ -62,6 +63,10 @@ class App extends React.Component {
     const target = event.target;
     const name = target.name;
     this.setState({ [name]: target.value, inputErr: false });
+  }
+
+  handleKeyEvent(event) {
+    if (event.key === "Enter") this.addWords();
   }
 
   async addWords() {
@@ -131,6 +136,7 @@ class App extends React.Component {
                 value={this.state.PL}
                 onChange={this.handleChange}
                 disabled={this.state.inputDisabled}
+                onKeyDown={this.handleKeyEvent}
               />
             </div>
             <button

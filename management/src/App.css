@@ -10,6 +10,7 @@ body {
   background: url("./golden-pavilion.jpg") no-repeat fixed center;
   background-size: 100vw;
   height: 100%;
+  overflow: hidden;
 }
 
 .App {
@@ -73,7 +74,6 @@ button {
 }
 
 .Add{
-  width: 35%;
   font-size: 20px;
   padding: 20px;
   margin: 40px;
@@ -82,7 +82,6 @@ button {
 
 
 #log-out {
-  width: 5%;
   padding: 5px;
   letter-spacing: 0.1em;
   border: 1px solid rgb(192, 172, 104);
