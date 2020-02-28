@@ -9,7 +9,8 @@ class App extends React.Component {
       lang: "PL",
       answerLang: "JP",
       answer: "",
-      currentWord: null
+      currentWord: null,
+      wrongAnswer: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -56,14 +57,14 @@ class App extends React.Component {
 
   compareValue() {
     this.state.answer === this.state.currentWord[this.state.answerLang]
-      ? console.log("Y")
-      : console.log("N");
-    this.drawNext();
+      ? this.drawNext()
+      : this.setState({ wrongAnswer: true, answer: "" });
   }
 
   drawNext() {
     this.setState({
       answer: "",
+      wrongAnswer: false,
       currentWord: this.drawWord()
     });
   }
@@ -93,6 +94,7 @@ class App extends React.Component {
           value={this.state.answer}
           type="text"
           autoComplete="off"
+          className={this.state.wrongAnswer ? "err" : null}
           onChange={this.handleChange}
           onKeyPress={this.handleKeyPress}
         />

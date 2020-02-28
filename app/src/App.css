@@ -50,3 +50,28 @@ input, button {
 input:focus, button:focus {
   outline: none;
 }
+
+.err
+  {
+    animation: shake 0.3s;
+    box-shadow: 0 0 0.3em red;
+  }
+
+@keyframes shake {
+  0% { margin-left: 0rem; }
+  15% { margin-left: 0.3rem; }
+  30% { margin-left: -0.3rem; }
+  45% { margin-left: 0.3rem; }
+  60% { margin-left: -0.3rem; }
+  75% { margin-left: 0.3rem; }
+  90% { margin-left: -0.3rem; }
+  100% { margin-left: 0rem; }
+  0% { margin-right: 0rem; }
+  15% { margin-right: 0.3rem; }
+  30% { margin-right: -0.3rem; }
+  45% { margin-right: 0.3rem; }
+  60% { margin-right: -0.3rem; }
+  75% { margin-right: 0.3rem; }
+  90% { margin-right: -0.3rem; }
+  100% { margin-right: 0rem; }
+}
