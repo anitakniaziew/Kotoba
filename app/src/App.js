@@ -1,11 +1,28 @@
 import React from "react";
 import "./App.css";
+import { StyledFirebaseAuth } from "react-firebaseui";
+import firebase from "firebase";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBMIXdcFo2Vh39JEqlKLG3HCmu6IaPEsjA",
+  authDomain: "kotoba-c36b8.firebaseapp.com",
+  databaseURL: "https://kotoba-c36b8.firebaseio.com",
+  projectId: "kotoba-c36b8",
+  storageBucket: "kotoba-c36b8.appspot.com",
+  messagingSenderId: "485785121406",
+  appId: "1:485785121406:web:f5000dfab142db5db25e2f",
+  measurementId: "G-PPJSE9HPG5"
+};
+
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.wordsList = [];
     this.state = {
+      currentUser: firebase.auth().currentUser,
       lang: "PL",
       answerLang: "JP",
       answer: "",
@@ -16,10 +33,34 @@ class App extends React.Component {
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.compareValue = this.compareValue.bind(this);
     this.toggleLang = this.toggleLang.bind(this);
+    this.uiConfig = {
+      signInFlow: "popup",
+      signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
+      callbacks: {
+        signInSuccessWithAuthResult: this.onLogIn.bind(this)
+      }
+    };
   }
 
-  loadWords() {
-    fetch("https://europe-west2-kotoba-c36b8.cloudfunctions.net/phrasesToLearn")
+  onLogIn(authResult) {
+    this.setState({
+      currentUser: authResult.user
+    });
+  }
+
+  async maybeLoadWords() {
+    if (!this.state.currentUser) return;
+
+    const idToken = await this.state.currentUser.getIdToken();
+
+    fetch(
+      "https://europe-west2-kotoba-c36b8.cloudfunctions.net/kotoba/phrasesToLearn",
+      {
+        headers: {
+          Authorization: "Bearer " + idToken
+        }
+      }
+    )
       .then(response => response.json())
       .then(response => {
         this.wordsList = response.data;
@@ -31,11 +72,18 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.loadWords();
+    this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
+      this.setState({ currentUser: user });
+      this.maybeLoadWords();
+    });
+  }
+
+  componentWillUnmount() {
+    this.unregisterAuthObserver();
   }
 
   drawWord() {
-    if (this.endList()) this.loadWords();
+    if (this.endList()) this.maybeLoadWords();
     const index = Math.floor(Math.random() * this.wordsList.length);
     let [word] = this.wordsList.splice(index, 1);
     return word;
@@ -78,8 +126,11 @@ class App extends React.Component {
   }
 
   render() {
-    return (
+    return this.state.currentUser ? (
       <div className="App">
+        <button id="log-out" onClick={() => firebase.auth().signOut()}>
+          Wyloguj
+        </button>
         <button className="lang" onClick={this.toggleLang}>
           {this.state.lang}
         </button>
@@ -100,6 +151,11 @@ class App extends React.Component {
         />
         <button onClick={this.compareValue}>ZATWIERDŹ</button>
       </div>
+    ) : (
+      <StyledFirebaseAuth
+        uiConfig={this.uiConfig}
+        firebaseAuth={firebase.auth()}
+      />
     );
   }
 }

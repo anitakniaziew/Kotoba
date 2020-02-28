@@ -9,7 +9,7 @@ info:
     name: Anita Kowalska
     url: 'https://github.com/anitakniaziew'
 servers:
-  - url: 'https://europe-west2-kotoba-c36b8.cloudfunctions.net'
+  - url: 'https://europe-west2-kotoba-c36b8.cloudfunctions.net/kotoba'
     description: Production
 tags:
   - name: learning
