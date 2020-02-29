@@ -14,7 +14,7 @@ module.exports = firebaseAdmin => async (req, res, next) => {
   const token = header.substring(7);
 
   try {
-    await firebaseAdmin.auth().verifyIdToken(token);
+    req.decodedIdToken = await firebaseAdmin.auth().verifyIdToken(token);
   } catch (e) {
     res.sendStatus(401);
     console.log(e);

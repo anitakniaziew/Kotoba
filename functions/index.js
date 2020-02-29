@@ -19,7 +19,9 @@ app.post("/answers", async (req, res) => {
 
   await Promise.all(
     req.body.data.map(async answer => {
-      await collection.add(answer);
+      await collection.add(
+        Object.assign({}, answer, { uid: req.decodedIdToken.uid })
+      );
     })
   );
 
