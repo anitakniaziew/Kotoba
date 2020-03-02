@@ -7,6 +7,7 @@ admin.initializeApp();
 
 const authorization = require("./authorization")(admin);
 const validation = require("./validation");
+const processAnswer = require("./processAnswer")(admin);
 
 const app = express();
 
@@ -61,3 +62,8 @@ app.get("/phrasesToLearn", async (req, res) => {
 });
 
 exports.kotoba = functions.region("europe-west2").https.onRequest(app);
+
+exports.onAnswer = functions
+  .region("europe-west2")
+  .firestore.document("answers/{answerId}")
+  .onCreate(processAnswer);
