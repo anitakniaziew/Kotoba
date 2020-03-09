@@ -49,15 +49,37 @@ app.post("/phrases", async (req, res) => {
 });
 
 app.get("/phrasesToLearn", async (req, res) => {
-  const snapshot = await admin
-    .firestore()
-    .collection("phrases")
+  const limit = 10;
+  const firestore = admin.firestore();
+
+  const reviewsQuery = firestore
+    .collection("userProgress")
+    .where("uid", "==", req.decodedIdToken.uid);
+
+  const reviewsSnapshot = await reviewsQuery
+    .where("askAt", "<=", new Date())
     .get();
-  const phrases = snapshot.docs.map(doc => doc.data());
+
+  const reviewPhrases = reviewsSnapshot.docs.map(doc => doc.get("phrase"));
+
+  const progressSnapshot = await reviewsQuery.get();
+  const progressPhrases = progressSnapshot.docs.map(doc => doc.get("phrase"));
+
+  const phrasesSnapshot = await firestore.collection("phrases").get();
+  const allPhrases = phrasesSnapshot.docs.map(doc => doc.data());
+
+  const newPhrases = allPhrases.filter(
+    phrase =>
+      !progressPhrases.some(
+        progress => progress.JP === phrase.JP && progress.PL === phrase.PL
+      )
+  );
+
+  const phrasesToLearn = reviewPhrases.concat(newPhrases).slice(0, limit);
 
   res.send({
-    data: phrases,
-    meta: { total: phrases.length }
+    data: phrasesToLearn,
+    meta: { total: phrasesToLearn.length }
   });
 });
 
