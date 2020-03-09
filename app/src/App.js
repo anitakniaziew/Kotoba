@@ -27,7 +27,8 @@ class App extends React.Component {
       answerLang: "JP",
       answer: "",
       currentWord: null,
-      wrongAnswer: false
+      wrongAnswer: false,
+      bottomButtonTxt: "sprawdź"
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -108,7 +109,8 @@ class App extends React.Component {
       ? this.drawNext()
       : this.setState({
           wrongAnswer: true,
-          answer: ""
+          answer: this.state.currentWord[this.state.answerLang],
+          bottomButtonTxt: "dalej"
         });
   }
 
@@ -116,7 +118,8 @@ class App extends React.Component {
     this.setState({
       answer: "",
       wrongAnswer: false,
-      currentWord: this.drawWord()
+      currentWord: this.drawWord(),
+      bottomButtonTxt: "sprawdź"
     });
   }
 
@@ -154,7 +157,9 @@ class App extends React.Component {
           onChange={this.handleChange}
           onKeyPress={this.handleKeyPress}
         />
-        <button onClick={this.compareValue}>ZATWIERDŹ</button>
+        <button onClick={this.compareValue}>
+          {this.state.bottomButtonTxt}
+        </button>
       </div>
     ) : (
       <StyledFirebaseAuth
