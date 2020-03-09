@@ -106,7 +106,10 @@ class App extends React.Component {
   compareValue() {
     this.state.answer === this.state.currentWord[this.state.answerLang]
       ? this.drawNext()
-      : this.setState({ wrongAnswer: true, answer: "" });
+      : this.setState({
+          wrongAnswer: true,
+          answer: ""
+        });
   }
 
   drawNext() {
@@ -128,12 +131,14 @@ class App extends React.Component {
   render() {
     return this.state.currentUser ? (
       <div className="App">
-        <button id="log-out" onClick={() => firebase.auth().signOut()}>
-          Wyloguj
-        </button>
-        <button className="lang" onClick={this.toggleLang}>
-          {this.state.lang}
-        </button>
+        <nav>
+          <button id="log-out" onClick={() => firebase.auth().signOut()}>
+            Wyloguj
+          </button>
+          <button className="lang" onClick={this.toggleLang}>
+            {this.state.lang}
+          </button>
+        </nav>
         <p>
           {!this.state.currentWord
             ? "Loading word..."
