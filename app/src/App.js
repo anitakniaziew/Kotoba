@@ -33,6 +33,7 @@ class App extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.compareValue = this.compareValue.bind(this);
+    this.sendUserAnswer = this.sendUserAnswer.bind(this);
     this.toggleLang = this.toggleLang.bind(this);
     this.uiConfig = {
       signInFlow: "popup",
@@ -97,6 +98,7 @@ class App extends React.Component {
   handleKeyPress(event) {
     if (event.key === "Enter") {
       this.compareValue();
+      this.sendUserAnswer();
     }
   }
 
@@ -114,6 +116,32 @@ class App extends React.Component {
         });
   }
 
+  async sendUserAnswer() {
+    const data = JSON.stringify({
+      data: [
+        {
+          question: this.state.currentWord[this.state.lang],
+          answer: this.state.answer,
+          language: this.state.lang
+        }
+      ]
+    });
+
+    const idToken = await this.state.currentUser.getIdToken();
+
+    await fetch(
+      "https://europe-west2-kotoba-c36b8.cloudfunctions.net/kotoba/answers",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          Authorization: "Bearer " + idToken
+        },
+        body: data
+      }
+    );
+  }
+
   drawNext() {
     this.setState({
       answer: "",
@@ -128,7 +156,6 @@ class App extends React.Component {
       ? this.setState({ lang: "JP", answerLang: "PL" })
       : this.setState({ lang: "PL", answerLang: "JP" });
     this.drawNext();
-    // document.getElementById("userAnswer").focus();
   }
 
   render() {
