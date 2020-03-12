@@ -10,6 +10,9 @@ module.exports = {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
   },
+  ignorePatterns: [
+    "build/"
+  ],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -19,7 +22,5 @@ module.exports = {
   },
   plugins: [
     'react',
-  ],
-  rules: {
-  },
+  ]
 };
