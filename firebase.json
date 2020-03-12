@@ -16,5 +16,33 @@
     "firestore": {
       "port": 8080
     }
-  }
+  },
+  "hosting": [
+    {
+      "target": "app",
+      "public": "app/build",
+      "predeploy": [
+        "npm --prefix ./app run lint",
+        "npm --prefix ./app run build"
+      ],
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ]
+    },
+    {
+      "target": "management",
+      "public": "management/build",
+      "predeploy": [
+        "npm --prefix ./management run lint",
+        "npm --prefix ./management run build"
+      ],
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ]
+    }
+  ]
 }

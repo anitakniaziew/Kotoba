@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "kotoba-c36b8"
+  },
+  "targets": {
+    "kotoba-c36b8": {
+      "hosting": {
+        "app": [
+          "kotoba-c36b8"
+        ],
+        "management": [
+          "kotoba-management"
+        ]
+      }
+    }
   }
 }
