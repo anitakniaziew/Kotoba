@@ -66,9 +66,13 @@ class App extends React.Component {
       .then(response => response.json())
       .then(response => {
         this.wordsList = response.data;
-        this.setState({
-          currentWord: this.drawWord()
-        });
+        this.wordsList.length === 0
+          ? this.setState({
+              currentWord: null
+            })
+          : this.setState({
+              currentWord: this.drawWord()
+            });
       })
       .catch(err => console.log(err));
   }
