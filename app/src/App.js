@@ -102,9 +102,11 @@ class App extends React.Component {
   }
 
   handleKeyPress(event) {
-    if (event.key === "Enter") {
+    if (event.key === "Enter" && this.state.bottomButtonTxt === "sprawdź") {
       this.compareValue();
       this.sendUserAnswer();
+    } else if (this.state.bottomButtonTxt === "dalej") {
+      this.drawNext();
     }
   }
 
@@ -113,13 +115,15 @@ class App extends React.Component {
   }
 
   compareValue() {
-    this.state.answer === this.state.currentWord[this.state.answerLang]
-      ? this.drawNext()
-      : this.setState({
-          wrongAnswer: true,
-          answer: this.state.currentWord[this.state.answerLang],
-          bottomButtonTxt: "dalej"
-        });
+    if (this.state.answer === this.state.currentWord[this.state.answerLang]) {
+      this.drawNext();
+    } else {
+      this.setState({
+        wrongAnswer: true,
+        answer: this.state.currentWord[this.state.answerLang],
+        bottomButtonTxt: "dalej"
+      });
+    }
   }
 
   async sendUserAnswer() {
