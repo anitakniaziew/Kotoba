@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import Inputs from "./Inputs";
+import Hiragana from "./hiragana";
 import { StyledFirebaseAuth } from "react-firebaseui";
 import firebase from "firebase/app";
 import "firebase/analytics";
@@ -64,7 +65,14 @@ class App extends React.Component {
   handleChange(event) {
     const target = event.target;
     const name = target.name;
-    this.setState({ [name]: target.value, inputErr: false });
+    let value = target.value;
+    if (name === "JP") {
+      Hiragana.forEach(pair => {
+        console.log(pair);
+        value = value.replace(pair[0], pair[1]);
+      });
+    }
+    this.setState({ [name]: value, inputErr: false });
   }
 
   handleKeyEvent(event) {
@@ -121,35 +129,35 @@ class App extends React.Component {
             firebaseAuth={firebase.auth()}
           />
         ) : (
-          <div className="form">
-            <div className="form-inputs">
-              <Inputs
-                className={this.state.inputErr ? "error" : null}
-                name="JP"
-                placeholder="JP"
-                value={this.state.JP}
-                onChange={this.handleChange}
+            <div className="form">
+              <div className="form-inputs">
+                <Inputs
+                  className={this.state.inputErr ? "error" : null}
+                  name="JP"
+                  placeholder="JP"
+                  value={this.state.JP}
+                  onChange={this.handleChange}
+                  disabled={this.state.inputDisabled}
+                />
+                <Inputs
+                  className={this.state.inputErr ? "error" : null}
+                  name="PL"
+                  placeholder="PL"
+                  value={this.state.PL}
+                  onChange={this.handleChange}
+                  disabled={this.state.inputDisabled}
+                  onKeyDown={this.handleKeyEvent}
+                />
+              </div>
+              <button
+                className="Add"
+                onClick={this.addWords}
                 disabled={this.state.inputDisabled}
-              />
-              <Inputs
-                className={this.state.inputErr ? "error" : null}
-                name="PL"
-                placeholder="PL"
-                value={this.state.PL}
-                onChange={this.handleChange}
-                disabled={this.state.inputDisabled}
-                onKeyDown={this.handleKeyEvent}
-              />
-            </div>
-            <button
-              className="Add"
-              onClick={this.addWords}
-              disabled={this.state.inputDisabled}
-            >
-              Dodaj słowa
+              >
+                Dodaj słowa
             </button>
-          </div>
-        )}
+            </div>
+          )}
       </div>
     );
   }
