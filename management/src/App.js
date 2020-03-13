@@ -129,35 +129,35 @@ class App extends React.Component {
             firebaseAuth={firebase.auth()}
           />
         ) : (
-            <div className="form">
-              <div className="form-inputs">
-                <Inputs
-                  className={this.state.inputErr ? "error" : null}
-                  name="JP"
-                  placeholder="JP"
-                  value={this.state.JP}
-                  onChange={this.handleChange}
-                  disabled={this.state.inputDisabled}
-                />
-                <Inputs
-                  className={this.state.inputErr ? "error" : null}
-                  name="PL"
-                  placeholder="PL"
-                  value={this.state.PL}
-                  onChange={this.handleChange}
-                  disabled={this.state.inputDisabled}
-                  onKeyDown={this.handleKeyEvent}
-                />
-              </div>
-              <button
-                className="Add"
-                onClick={this.addWords}
+          <div className="form">
+            <div className="form-inputs">
+              <Inputs
+                className={this.state.inputErr ? "error" : null}
+                name="JP"
+                placeholder="JP"
+                value={this.state.JP}
+                onChange={this.handleChange}
                 disabled={this.state.inputDisabled}
-              >
-                Dodaj słowa
-            </button>
+              />
+              <Inputs
+                className={this.state.inputErr ? "error" : null}
+                name="PL"
+                placeholder="PL"
+                value={this.state.PL}
+                onChange={this.handleChange}
+                disabled={this.state.inputDisabled}
+                onKeyDown={this.handleKeyEvent}
+              />
             </div>
-          )}
+            <button
+              className="Add"
+              onClick={this.addWords}
+              disabled={this.state.inputDisabled}
+            >
+              Dodaj słowa
+            </button>
+          </div>
+        )}
       </div>
     );
   }
