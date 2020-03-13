@@ -166,6 +166,7 @@ class App extends React.Component {
       currentWord: this.drawWord(),
       bottomButtonTxt: "sprawdź"
     });
+    document.querySelector("#userAnswer").focus();
   }
 
   toggleLang() {
