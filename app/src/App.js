@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import { StyledFirebaseAuth } from "react-firebaseui";
+import Hiragana from "./hiragana";
 import firebase from "firebase/app";
 import "firebase/analytics";
 import "firebase/auth";
@@ -98,7 +99,13 @@ class App extends React.Component {
   }
 
   handleChange(event) {
-    this.setState({ answer: event.target.value });
+    let value = event.target.value;
+    if (this.state.lang === "PL") {
+      Hiragana.forEach(pair => {
+        value = value.replace(pair[0], pair[1]);
+      });
+    }
+    this.setState({ answer: value });
   }
 
   handleKeyPress(event) {
