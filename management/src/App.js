@@ -1,6 +1,5 @@
 import React from "react";
 import "./App.css";
-import Inputs from "./Inputs";
 import Hiragana from "./hiragana";
 import { StyledFirebaseAuth } from "react-firebaseui";
 import firebase from "firebase/app";
@@ -24,6 +23,7 @@ firebase.analytics();
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.jpInputRef = React.createRef();
     this.dict = [];
     this.state = {
       currentUser: firebase.auth().currentUser,
@@ -68,7 +68,6 @@ class App extends React.Component {
     let value = target.value;
     if (name === "JP") {
       Hiragana.forEach(pair => {
-        console.log(pair);
         value = value.replace(pair[0], pair[1]);
       });
     }
@@ -76,7 +75,9 @@ class App extends React.Component {
   }
 
   handleKeyEvent(event) {
-    if (event.key === "Enter") this.addWords();
+    if (event.key === "Enter") {
+      this.addWords();
+    }
   }
 
   async addWords() {
@@ -101,19 +102,24 @@ class App extends React.Component {
           "Content-Type": "application/json;charset=utf-8",
           Authorization: "Bearer " + idToken
         },
+
         body: data
       }
     );
+
     this.setState({
       inputDisabled: false,
       JP: "",
       PL: ""
     });
+
     if (!res.ok) {
       this.setState({
         inputErr: true
       });
     }
+
+    this.jpInputRef.current.focus();
   }
 
   render() {
@@ -131,21 +137,26 @@ class App extends React.Component {
         ) : (
           <div className="form">
             <div className="form-inputs">
-              <Inputs
+              <input
                 className={this.state.inputErr ? "error" : null}
                 name="JP"
                 placeholder="JP"
                 value={this.state.JP}
                 onChange={this.handleChange}
                 disabled={this.state.inputDisabled}
+                autoComplete="off"
+                autoFocus={true}
+                ref={this.jpInputRef}
+                onKeyDown={this.handleKeyEvent}
               />
-              <Inputs
+              <input
                 className={this.state.inputErr ? "error" : null}
                 name="PL"
                 placeholder="PL"
                 value={this.state.PL}
                 onChange={this.handleChange}
                 disabled={this.state.inputDisabled}
+                autoComplete="off"
                 onKeyDown={this.handleKeyEvent}
               />
             </div>
