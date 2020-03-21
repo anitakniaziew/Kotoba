@@ -1,0 +1,25 @@
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["build", "-t", "gcr.io/kotoba-c36b8/firebase", "."]
+  - name: node:dubnium
+    entrypoint: npm
+    dir: app
+    args: ["ci"]
+  - name: node:dubnium
+    entrypoint: npm
+    dir: functions
+    args: ["ci"]
+  - name: node:dubnium
+    entrypoint: npm
+    dir: management
+    args: ["ci"]
+  - name: "gcr.io/kotoba-c36b8/firebase"
+    entrypoint: bash
+    args: ["-c", "firebase deploy --token $$FIREBASE_TOKEN"]
+    secretEnv: ["FIREBASE_TOKEN"]
+images:
+  - "gcr.io/kotoba-c36b8/firebase"
+secrets:
+  - kmsKeyName: projects/kotoba-c36b8/locations/global/keyRings/deployment/cryptoKeys/firebase-token
+    secretEnv:
+      FIREBASE_TOKEN: CiQA5EFv6rRn6l1umax9jeW76MbUltjF4IrQ86w/mSuuPoj3dXcSkAEAH4zzEksuYgEUS/s2qion9q+WMBbKyr8hMcl9qZsgFfbf5MrJ2CpG24h3/2pty+HhVoYEHlGZuPTJxxdhcXPuz/0Wb+eYVo+TNp6WLbM+TfBXpsS+DJkulw6ZOM5g0VphA0GrrBzvf/z9KOb3MvfF/ntyXlZ7VWWRfEb4uXOvdWX5dihYanMsdayevZLQVa8=
