@@ -30,7 +30,7 @@ const findPhrase = async (phrasesCollection, answer) => {
 
 const findUserProgress = async (progressCollection, phrase, answer) => {
   const matchingUserProgresses = await progressCollection
-    .where("phrase", "==", phrase.ref)
+    .where("phrase." + answer.language, "==", phrase.get(answer.language))
     .where("uid", "==", answer.uid)
     .limit(1)
     .get();
@@ -77,7 +77,7 @@ const initializeUserProgress = (phrase, answer) => {
   return {
     askAt: add(new Date(), level.intervalDuration),
     level: 0,
-    phrase: phrase.ref,
+    phrase: phrase.data(),
     streak: isCorrect(phrase, answer) ? 1 : 0,
     uid: answer.uid
   };
