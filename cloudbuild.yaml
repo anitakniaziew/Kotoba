@@ -9,10 +9,6 @@ steps:
     entrypoint: npm
     dir: functions
     args: ["ci"]
-  - name: node:dubnium
-    entrypoint: npm
-    dir: management
-    args: ["ci"]
   - name: "gcr.io/kotoba-c36b8/firebase"
     entrypoint: bash
     args: ["-c", "firebase deploy --token $$FIREBASE_TOKEN"]

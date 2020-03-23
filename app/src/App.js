@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Learn from "./Learn";
 import Home from "./Home";
+import Admin from "./Admin";
 
 import { StyledFirebaseAuth } from "react-firebaseui";
 import firebase from "firebase/app";
@@ -16,7 +17,7 @@ const firebaseConfig = {
   projectId: "kotoba-c36b8",
   storageBucket: "kotoba-c36b8.appspot.com",
   messagingSenderId: "485785121406",
-  appId: "1:485785121406:web:f5000dfab142db5db25e2f",
+  appId: "1:485785121406:web:f5000dfHomeab142db5db25e2f",
   measurementId: "G-PPJSE9HPG5"
 };
 
@@ -68,14 +69,20 @@ export default class App extends React.Component {
                 signOut={() => firebase.auth().signOut()}
               />
             </Route>
+            <Route path="/admin">
+              <Admin
+                currentUser={this.state.currentUser}
+                signOut={() => firebase.auth().signOut()}
+              />
+            </Route>
           </Switch>
         </div>
       </Router>
     ) : (
-      <StyledFirebaseAuth
-        uiConfig={this.uiConfig}
-        firebaseAuth={firebase.auth()}
-      />
-    );
+        <StyledFirebaseAuth
+          uiConfig={this.uiConfig}
+          firebaseAuth={firebase.auth()}
+        />
+      );
   }
 }

@@ -13,6 +13,9 @@ class Home extends React.Component {
           <button>
             <Link to="/learn">Ucz się</Link>
           </button>
+          <button>
+            <Link to="/admin">Dodaj słowa</Link>
+          </button>
         </nav>
       </div>
     );

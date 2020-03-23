@@ -7,9 +7,6 @@
       "hosting": {
         "app": [
           "kotoba-c36b8"
-        ],
-        "management": [
-          "kotoba-management"
         ]
       }
     }
