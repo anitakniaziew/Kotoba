@@ -79,10 +79,10 @@ export default class App extends React.Component {
         </div>
       </Router>
     ) : (
-        <StyledFirebaseAuth
-          uiConfig={this.uiConfig}
-          firebaseAuth={firebase.auth()}
-        />
-      );
+      <StyledFirebaseAuth
+        uiConfig={this.uiConfig}
+        firebaseAuth={firebase.auth()}
+      />
+    );
   }
 }
