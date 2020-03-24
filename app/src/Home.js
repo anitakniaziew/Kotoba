@@ -6,17 +6,10 @@ class Home extends React.Component {
   render() {
     return (
       <div className={styles.home}>
-        <div>
-          <h1>Cześć!</h1>
-        </div>
-        <nav>
-          <button>
-            <Link to="/learn">Ucz się</Link>
-          </button>
-          <button>
-            <Link to="/admin">Dodaj słowa</Link>
-          </button>
-        </nav>
+        <main>
+          <h1>Witaj, w Kotoba</h1>
+          <p>Pozostało Ci 0 słów do nauki</p>
+        </main>
       </div>
     );
   }

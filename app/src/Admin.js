@@ -81,10 +81,6 @@ class App extends React.Component {
   render() {
     return (
       <div className={styles.app}>
-        <button id="log-out" onClick={() => this.props.signOut()}>
-          Wyloguj
-        </button>
-        <header>Kotoba words</header>
         <div className={styles.form}>
           <div className={styles.formInputs}>
             <input

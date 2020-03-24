@@ -3,12 +3,9 @@
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
     box-sizing: border-box;
-    color: #373737;
   }
   
   body {
-    background: url("./golden-pavilion.jpg") no-repeat fixed center;
-    background-size: 100vw;
     height: 100%;
     overflow: hidden;
   }
@@ -17,21 +14,10 @@
     text-align: center;
     margin: 0 auto
   }
-  
-  header {
-    font-size: 30px;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 0.5em;
-    background-color: rgba(222, 224, 222, 0.8);
-    margin: 60px 0;
-    padding: 10px;
-    color: #373737;
-  }
+
   
   .form {
     margin: 0 auto;
-    background-color: rgba(222, 224, 222, 0.8);
     width: 50%;
     height: 70%;
     display: flex;
@@ -52,7 +38,7 @@
     justify-content: space-around;
   }
   
-  input {
+  .formInputs input {
     width: 40%;
     font-size: 20px;
     padding: 10px;
@@ -63,14 +49,6 @@
   
   input:focus, button:focus {
     outline: 3px solid rgb(192, 172, 104);
-  }
-  
-  button {
-    background-color: #C0B283;
-    text-transform: uppercase;
-    font-weight: bold;
-    border: 1px solid rgb(192, 172, 104);
-    color: #f4f4f4;
   }
   
   .Add{

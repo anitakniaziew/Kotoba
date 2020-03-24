@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Learn from "./Learn";
 import Home from "./Home";
 import Admin from "./Admin";
+import Nav from "./Nav";
 
 import { StyledFirebaseAuth } from "react-firebaseui";
 import firebase from "firebase/app";
@@ -64,18 +65,13 @@ export default class App extends React.Component {
               <Home />
             </Route>
             <Route path="/learn">
-              <Learn
-                currentUser={this.state.currentUser}
-                signOut={() => firebase.auth().signOut()}
-              />
+              <Learn currentUser={this.state.currentUser} />
             </Route>
             <Route path="/admin">
-              <Admin
-                currentUser={this.state.currentUser}
-                signOut={() => firebase.auth().signOut()}
-              />
+              <Admin currentUser={this.state.currentUser} />
             </Route>
           </Switch>
+          <Nav signOut={() => firebase.auth().signOut()} />
         </div>
       </Router>
     ) : (

@@ -1,0 +1,26 @@
+nav {
+    background-color: lightpink;
+    color: white;
+    height: 3.5em;
+    padding: 1.2em;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+  }
+  
+  a, a:visited {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .logOut { 
+    margin: 0;
+    border: none;
+    font-size: 1em;
+    padding: 0;
+  }
+  

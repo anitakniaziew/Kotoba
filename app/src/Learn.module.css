@@ -13,27 +13,12 @@
   text-transform: uppercase;
 }
 
-.nav {
-  height: 52px;
-  display: inline-flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-top: 20px;
-  margin-bottom: 100px;
-}
-
 .lang {
   height: 52px;
   width: 52px;
   font-size: 18px;
   border: 2px solid palevioletred;
   border-radius: 50%;
-}
-
-.logOut { 
-  height: 32px;
-  font-size: 16px;
-  padding: 5px;
 }
 
 button {

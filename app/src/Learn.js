@@ -138,17 +138,9 @@ class App extends React.Component {
   render() {
     return (
       <div className={styles.app}>
-        <nav className={styles.nav}>
-          <button
-            className={styles.logOut}
-            onClick={() => this.props.signOut()}
-          >
-            Wyloguj
-          </button>
-          <button className={styles.lang} onClick={this.toggleLang}>
-            {this.state.lang}
-          </button>
-        </nav>
+        <button className={styles.lang} onClick={this.toggleLang}>
+          {this.state.lang}
+        </button>
         <p className={styles.currentWord}>
           {!this.state.currentWord
             ? "Loading word..."

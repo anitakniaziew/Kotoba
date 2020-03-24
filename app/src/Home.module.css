@@ -1,6 +1,6 @@
-
-.home {
-  margin: 0 auto;
+main {
+  text-align: center;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
