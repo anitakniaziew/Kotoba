@@ -80,7 +80,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className={styles.form}>
+      <div className="wrapper">
         <div className={styles.formInputs}>
           <input
             className={this.state.inputErr ? styles.error : null}
@@ -105,7 +105,11 @@ class App extends React.Component {
             onKeyDown={this.handleKeyEvent}
           />
         </div>
-        <button onClick={this.addWords} disabled={this.state.inputDisabled}>
+        <button
+          className="mainButton"
+          onClick={this.addWords}
+          disabled={this.state.inputDisabled}
+        >
           Dodaj
         </button>
       </div>

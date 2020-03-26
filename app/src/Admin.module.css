@@ -1,15 +1,5 @@
-.form {
-  margin: 0 auto;
-  margin-top: 80px;
-  width: 80%;
-}
-
-.form button {
-  width: 100%;
-}
-
-.formInputs input {
-  width: 100%;
+.formInputs {
+  margin-top: 100px;
 }
 
 .error {

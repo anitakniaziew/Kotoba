@@ -137,7 +137,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className={styles.learn}>
+      <div className="wrapper">
         <button className={styles.lang} onClick={this.toggleLang}>
           {this.state.lang}
         </button>
@@ -156,7 +156,7 @@ class App extends React.Component {
           onChange={this.handleChange}
           onKeyPress={this.handleKeyPress}
         />
-        <button onClick={this.compareValue}>
+        <button className="mainButton" onClick={this.compareValue}>
           {this.state.bottomButtonTxt}
         </button>
       </div>

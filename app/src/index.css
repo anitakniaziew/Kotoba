@@ -11,6 +11,14 @@ body, html, #root {
   overflow: hidden;
 }
 
+.wrapper {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 80%;
+}
+
 p, input {
   color: palevioletred;
 }
@@ -33,3 +41,9 @@ button {
   background-color: lightpink;
   color: white;
 }
+
+mainButton, input {
+  width: 100%;
+}
+
+
