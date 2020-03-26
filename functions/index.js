@@ -48,38 +48,67 @@ app.post("/phrases", async (req, res) => {
   res.sendStatus(201);
 });
 
-app.get("/phrasesToLearn", async (req, res) => {
-  const limit = 10;
+const fetchPhrases = async uid => {
   const firestore = admin.firestore();
 
-  const reviewsQuery = firestore
+  const userProgressSnapshot = await firestore
     .collection("userProgress")
-    .where("uid", "==", req.decodedIdToken.uid);
-
-  const reviewsSnapshot = await reviewsQuery
-    .where("askAt", "<=", new Date())
+    .where("uid", "==", uid)
     .get();
 
-  const reviewPhrases = reviewsSnapshot.docs.map(doc => doc.get("phrase"));
+  const phrasesBeingLearned = userProgressSnapshot.docs.map(doc =>
+    doc.get("phrase")
+  );
 
-  const progressSnapshot = await reviewsQuery.get();
-  const progressPhrases = progressSnapshot.docs.map(doc => doc.get("phrase"));
+  const phrasesToReview = userProgressSnapshot.docs
+    .filter(doc => doc.get("askAt") < new Date())
+    .map(doc => doc.get("phrase"));
 
   const phrasesSnapshot = await firestore.collection("phrases").get();
   const allPhrases = phrasesSnapshot.docs.map(doc => doc.data());
 
-  const newPhrases = allPhrases.filter(
+  const phrasesToLearn = allPhrases.filter(
     phrase =>
-      !progressPhrases.some(
+      !phrasesBeingLearned.some(
         progress => progress.JP === phrase.JP && progress.PL === phrase.PL
       )
   );
 
-  const phrasesToLearn = reviewPhrases.concat(newPhrases).slice(0, limit);
+  return {
+    phrasesBeingLearned,
+    phrasesToReview,
+    phrasesToLearn
+  };
+};
+
+app.get("/phrasesToLearn", async (req, res) => {
+  const limit = 10;
+
+  const { phrasesToReview, phrasesToLearn } = await fetchPhrases(
+    req.decodedIdToken.uid
+  );
+
+  const learningBatch = phrasesToReview.concat(phrasesToLearn).slice(0, limit);
 
   res.send({
-    data: phrasesToLearn,
-    meta: { total: phrasesToLearn.length }
+    data: learningBatch,
+    meta: { total: learningBatch.length }
+  });
+});
+
+app.get("/phrasesCount", async (req, res) => {
+  const {
+    phrasesBeingLearned,
+    phrasesToReview,
+    phrasesToLearn
+  } = await fetchPhrases(req.decodedIdToken.uid);
+
+  res.send({
+    data: {
+      phrasesBeingLearned: phrasesBeingLearned.length,
+      phrasesToReview: phrasesToReview.length,
+      phrasesToLearn: phrasesToLearn.length
+    }
   });
 });
 

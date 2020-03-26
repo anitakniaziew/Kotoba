@@ -1,20 +1,20 @@
 openapi: 3.0.0
 info:
   title: kotoba-api
-  version: '1.0'
+  version: "1.0"
   description: API serving the Japanese language learning app Kotoba
   license:
     name: MIT
   contact:
     name: Anita Kowalska
-    url: 'https://github.com/anitakniaziew'
+    url: "https://github.com/anitakniaziew"
 servers:
-  - url: 'https://europe-west2-kotoba-c36b8.cloudfunctions.net/kotoba'
+  - url: "https://europe-west2-kotoba-c36b8.cloudfunctions.net/kotoba"
     description: Production
 tags:
   - name: learning
     description: Endpoints used for learning
-  - name: management
+  - name: admin
     description: Endpoints for content management
 paths:
   /phrasesToLearn:
@@ -23,7 +23,7 @@ paths:
       tags:
         - learning
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -62,13 +62,42 @@ paths:
       operationId: get-phrases
       description: Returns the next phrases to learn based on the learning optimization algorithm.
     parameters: []
+  /phrasesCount:
+    get:
+      summary: Fetch Phrases Count
+      tags:
+        - learning
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    description: An object containing phrase counts
+                    properties:
+                      phrasesToReview:
+                        type: integer
+                        minimum: 0
+                        description: The number of phrases to review now
+                    required:
+                      - phrasesToReview
+                required:
+                  - data
+              examples: {}
+      operationId: get-phrases-count
+      description: Returns various counts of phrases - the ones to learn, the ones to review, etc.
+    parameters: []
   /phrases:
     post:
       summary: Add phrases to database
       tags:
-        - management
+        - admin
       responses:
-        '201':
+        "201":
           description: Created
       operationId: post-phrases
       description: Registers new phrases in the database.
@@ -100,7 +129,7 @@ paths:
       tags:
         - learning
       responses:
-        '202':
+        "202":
           description: Accepted
       operationId: post-answers
       description: Allows to send a batch of answers for statistical purposes and calculating learning intervals.
