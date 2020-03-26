@@ -63,7 +63,7 @@ export default class App extends React.Component {
         <div className={styles.app}>
           <Switch>
             <Route exact path="/">
-              <Home />
+              <Home currentUser={this.state.currentUser} />
             </Route>
             <Route path="/learn">
               <Learn currentUser={this.state.currentUser} />
