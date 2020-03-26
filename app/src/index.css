@@ -1,9 +1,35 @@
-body, html, #root {
-  height: 100%;
-}
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body, html, #root {
+  height: 100%;
+  overflow: hidden;
+}
+
+p, input {
+  color: palevioletred;
+}
+
+input, button {
+  text-align: center;
+  border: 2px solid palevioletred;
+  border-radius: 5px;
+  margin-top: 20px;
+  padding: 15px;
+  font-size: 24px;
+  text-transform: uppercase;
+}
+
+input:focus, button:focus {
+  outline: none;
+}
+
+button {
+  background-color: lightpink;
+  color: white;
 }

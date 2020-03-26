@@ -5,6 +5,7 @@ import Learn from "./Learn";
 import Home from "./Home";
 import Admin from "./Admin";
 import Nav from "./Nav";
+import styles from "./App.module.css";
 
 import { StyledFirebaseAuth } from "react-firebaseui";
 import firebase from "firebase/app";
@@ -59,7 +60,7 @@ export default class App extends React.Component {
   render() {
     return this.state.currentUser ? (
       <Router>
-        <div>
+        <div className={styles.app}>
           <Switch>
             <Route exact path="/">
               <Home />

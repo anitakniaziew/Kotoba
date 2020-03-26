@@ -80,40 +80,34 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className={styles.app}>
-        <div className={styles.form}>
-          <div className={styles.formInputs}>
-            <input
-              className={this.state.inputErr ? styles.error : null}
-              name="JP"
-              placeholder="JP"
-              value={this.state.JP}
-              onChange={this.handleChange}
-              disabled={this.state.inputDisabled}
-              autoComplete="off"
-              autoFocus={true}
-              ref={this.jpInputRef}
-              onKeyDown={this.handleKeyEvent}
-            />
-            <input
-              className={this.state.inputErr ? styles.error : null}
-              name="PL"
-              placeholder="PL"
-              value={this.state.PL}
-              onChange={this.handleChange}
-              disabled={this.state.inputDisabled}
-              autoComplete="off"
-              onKeyDown={this.handleKeyEvent}
-            />
-          </div>
-          <button
-            className={styles.add}
-            onClick={this.addWords}
+      <div className={styles.form}>
+        <div className={styles.formInputs}>
+          <input
+            className={this.state.inputErr ? styles.error : null}
+            name="JP"
+            placeholder="JP"
+            value={this.state.JP}
+            onChange={this.handleChange}
             disabled={this.state.inputDisabled}
-          >
-            Dodaj słowa
-          </button>
+            autoComplete="off"
+            autoFocus={true}
+            ref={this.jpInputRef}
+            onKeyDown={this.handleKeyEvent}
+          />
+          <input
+            className={this.state.inputErr ? styles.error : null}
+            name="PL"
+            placeholder="PL"
+            value={this.state.PL}
+            onChange={this.handleChange}
+            disabled={this.state.inputDisabled}
+            autoComplete="off"
+            onKeyDown={this.handleKeyEvent}
+          />
         </div>
+        <button onClick={this.addWords} disabled={this.state.inputDisabled}>
+          Dodaj
+        </button>
       </div>
     );
   }

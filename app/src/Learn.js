@@ -137,7 +137,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className={styles.app}>
+      <div className={styles.learn}>
         <button className={styles.lang} onClick={this.toggleLang}>
           {this.state.lang}
         </button>

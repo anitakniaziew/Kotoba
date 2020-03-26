@@ -1,8 +1,8 @@
 nav {
     background-color: lightpink;
     color: white;
-    height: 3.5em;
-    padding: 1.2em;
+    height: 4.2em;
+    padding: 0.7em;
     font-size: 0.8em;
     text-transform: uppercase;
     display: flex;
@@ -24,3 +24,13 @@ nav {
     padding: 0;
   }
   
+  img {
+    height: 28px;
+    width: 28px;
+    margin: 0 15px;
+  }
+
+  .navButton{
+    font-size: 8px;
+    font-weight: 200;
+  }
