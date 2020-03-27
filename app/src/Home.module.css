@@ -1,6 +1,23 @@
-main {
-  text-align: center;
+.main {
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
+
+.greater {
+  color: palevioletred;
+  margin-bottom: 40px;
+}
+
+td {
+  color: rgb(122, 119, 119);
+  text-align: left;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 16px;
+  border: 2px solid rgba(216, 112, 147, 0.623);
+}
+
+.num {
+  text-align: center;
+}
+

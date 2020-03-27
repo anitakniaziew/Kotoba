@@ -3,7 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
 }
 
 body, html, #root {
@@ -17,20 +17,25 @@ body, html, #root {
   flex-direction: column;
   justify-content: space-around;
   width: 80%;
+  margin-top: 120px;
 }
 
 p, input {
   color: palevioletred;
 }
 
-input, button {
+input, button, table {
   text-align: center;
-  border: 2px solid palevioletred;
+  border: 2px solid rgba(216, 112, 147, 0.753);
   border-radius: 5px;
   margin-top: 20px;
   padding: 15px;
   font-size: 24px;
   text-transform: uppercase;
+}
+
+table {
+  padding: 0px;
 }
 
 input:focus, button:focus {
@@ -42,8 +47,12 @@ button {
   color: white;
 }
 
-mainButton, input {
+.mainButton, input {
   width: 100%;
+}
+
+.mainButton {
+  margin-top: 30px;
 }
 
 

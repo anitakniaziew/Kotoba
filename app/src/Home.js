@@ -6,7 +6,8 @@ class Home extends React.Component {
     super(props);
     this.state = {
       beingLearned: null,
-      toReview: null
+      toReview: null,
+      toLearn: null
     };
   }
   async phrasesToReview() {
@@ -24,7 +25,8 @@ class Home extends React.Component {
       .then(response => {
         this.setState({
           toReview: response.data.phrasesToReview,
-          beingLearned: response.data.phrasesBeingLearned
+          beingLearned: response.data.phrasesBeingLearned,
+          toLearn: response.data.phrasesToLearn
         });
       })
       .catch(err => console.log(err));
@@ -36,11 +38,25 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className={styles.home}>
-        <main>
-          <h1>Cześć, {this.props.currentUser.displayName}!</h1>
-          <p>Masz {this.state.toReview} słówek do powtórzenia.</p>
-          <p>Nauczyłeś się juz {this.state.beingLearned} słów.</p>
+      <div className="wrapper">
+        <main className={styles.main}>
+          <h1 className={styles.greater}>
+            Cześć, {this.props.currentUser.displayName}!
+          </h1>
+          <table>
+            <tr>
+              <td>Słówka do powtórzenia</td>
+              <td className={styles.num}>{this.state.toReview}</td>
+            </tr>
+            <tr>
+              <td>Słówka nauczone</td>
+              <td className={styles.num}>{this.state.beingLearned}</td>
+            </tr>
+            <tr>
+              <td>Słówka do nauki</td>
+              <td className={styles.num}>{this.state.toLearn}</td>
+            </tr>
+          </table>
         </main>
       </div>
     );
