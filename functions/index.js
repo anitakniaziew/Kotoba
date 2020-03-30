@@ -61,7 +61,11 @@ const fetchPhrases = async uid => {
   );
 
   const phrasesToReview = userProgressSnapshot.docs
-    .filter(doc => doc.get("askAt") < new Date())
+    .filter(doc => {
+      const now = new Date();
+      const askAt = doc.get("askAt").toDate();
+      return askAt < now;
+    })
     .map(doc => doc.get("phrase"));
 
   const phrasesSnapshot = await firestore.collection("phrases").get();
