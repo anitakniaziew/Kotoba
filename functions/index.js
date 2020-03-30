@@ -81,14 +81,21 @@ const fetchPhrases = async uid => {
   };
 };
 
+const LIMIT = 10;
+
 app.get("/phrasesToLearn", async (req, res) => {
-  const limit = 10;
+  const { phrasesToLearn } = await fetchPhrases(req.decodedIdToken.uid);
+  const learningBatch = phrasesToLearn.slice(0, LIMIT);
 
-  const { phrasesToReview, phrasesToLearn } = await fetchPhrases(
-    req.decodedIdToken.uid
-  );
+  res.send({
+    data: learningBatch,
+    meta: { total: learningBatch.length }
+  });
+});
 
-  const learningBatch = phrasesToReview.concat(phrasesToLearn).slice(0, limit);
+app.get("/phrasesToReview", async (req, res) => {
+  const { phrasesToReview } = await fetchPhrases(req.decodedIdToken.uid);
+  const learningBatch = phrasesToReview.slice(0, LIMIT);
 
   res.send({
     data: learningBatch,

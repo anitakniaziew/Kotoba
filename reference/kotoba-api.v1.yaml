@@ -54,13 +54,58 @@ paths:
                       total:
                         type: integer
                         minimum: 0
-                        description: Number of total words to learn
+                        description: Number of total phrases to learn
                 required:
                   - data
                   - meta
               examples: {}
-      operationId: get-phrases
-      description: Returns the next phrases to learn based on the learning optimization algorithm.
+      operationId: get-phrases-to-learn
+      description: Returns the next phrases to learn.
+    parameters: []
+  /phrasesToReview:
+    get:
+      summary: Fetch Phrases to Review
+      tags:
+        - learning
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      description: A single phrase
+                      properties:
+                        PL:
+                          type: string
+                          description: Polish translation
+                        JP:
+                          type: string
+                          description: Japanese translation
+                      required:
+                        - PL
+                        - JP
+                  meta:
+                    type: object
+                    required:
+                      - total
+                    description: Metadata describing the collection
+                    properties:
+                      total:
+                        type: integer
+                        minimum: 0
+                        description: Number of total phrases to review
+                required:
+                  - data
+                  - meta
+              examples: {}
+      operationId: get-phrases-to-review
+      description: Returns the next phrases to review based on the learning algorithm.
     parameters: []
   /phrasesCount:
     get:
