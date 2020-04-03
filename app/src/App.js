@@ -65,8 +65,17 @@ export default class App extends React.Component {
             <Route exact path="/">
               <Home currentUser={this.state.currentUser} />
             </Route>
-            <Route path="/learn">
-              <Learn currentUser={this.state.currentUser} />
+            <Route path="/learn" key="learn">
+              <Learn
+                currentUser={this.state.currentUser}
+                phraseCollection="phrasesToLearn"
+              />
+            </Route>
+            <Route path="/review" key="review">
+              <Learn
+                currentUser={this.state.currentUser}
+                phraseCollection="phrasesToReview"
+              />
             </Route>
             <Route path="/admin">
               <Admin currentUser={this.state.currentUser} />

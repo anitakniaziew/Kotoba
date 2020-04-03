@@ -16,18 +16,16 @@ nav {
     color: white;
     text-decoration: none;
   }
+
+  h1 {
+    margin-top: 0.6em;
+  }
   
   .logOut { 
     margin: 0;
     border: none;
     font-size: 1em;
     padding: 0;
-  }
-  
-  img {
-    height: 28px;
-    width: 28px;
-    margin: 0 15px;
   }
 
   .navButton{

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./Home.module.css";
 
 class Home extends React.Component {
@@ -46,7 +47,9 @@ class Home extends React.Component {
           <table>
             <tr>
               <td>Słówka do powtórzenia</td>
-              <td className={styles.num}>{this.state.toReview}</td>
+              <Link to="/review">
+                <td className={styles.num}>{this.state.toReview}</td>
+              </Link>
             </tr>
             <tr>
               <td>Słówka nauczone</td>
@@ -54,7 +57,9 @@ class Home extends React.Component {
             </tr>
             <tr>
               <td>Słówka do nauki</td>
-              <td className={styles.num}>{this.state.toLearn}</td>
+              <Link to="/learn">
+                <td className={styles.num}>{this.state.toLearn}</td>
+              </Link>
             </tr>
           </table>
         </main>

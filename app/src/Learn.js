@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Learn.module.css";
 import Hiragana from "./hiragana";
 
-class App extends React.Component {
+class Learn extends React.Component {
   constructor(props) {
     super(props);
     this.wordsList = [];
@@ -10,6 +10,7 @@ class App extends React.Component {
       lang: "PL",
       answerLang: "JP",
       answer: "",
+      isLoading: false,
       currentWord: null,
       wrongAnswer: false,
       bottomButtonTxt: "sprawdź"
@@ -22,25 +23,32 @@ class App extends React.Component {
   }
 
   async maybeLoadWords() {
+    this.setState({
+      isLoading: true
+    });
+
     const idToken = await this.props.currentUser.getIdToken();
 
-    fetch(
-      "https://europe-west2-kotoba-c36b8.cloudfunctions.net/kotoba/phrasesToLearn",
-      {
-        headers: {
-          Authorization: "Bearer " + idToken
-        }
+    const url =
+      "https://europe-west2-kotoba-c36b8.cloudfunctions.net/kotoba/" +
+      this.props.phraseCollection;
+
+    fetch(url, {
+      headers: {
+        Authorization: "Bearer " + idToken
       }
-    )
+    })
       .then(response => response.json())
       .then(response => {
         this.wordsList = response.data;
         this.wordsList.length === 0
           ? this.setState({
-              currentWord: null
+              currentWord: null,
+              isLoading: false
             })
           : this.setState({
-              currentWord: this.drawWord()
+              currentWord: this.drawWord(),
+              isLoading: false
             });
       })
       .catch(err => console.log(err));
@@ -142,9 +150,11 @@ class App extends React.Component {
           {this.state.lang}
         </button>
         <p className={styles.currentWord}>
-          {!this.state.currentWord
-            ? "Loading word..."
-            : this.state.currentWord[this.state.lang]}
+          {this.state.isLoading
+            ? "Ładowanie"
+            : this.state.currentWord
+            ? this.state.currentWord[this.state.lang]
+            : "Nie masz nic do nauki"}
         </p>
         <input
           autoFocus
@@ -164,4 +174,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default Learn;
