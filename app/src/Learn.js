@@ -1,9 +1,7 @@
 import React from "react";
 import styles from "./Learn.module.css";
 import Hiragana from "./hiragana";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import Loader from "./Loader";
 
 class Learn extends React.Component {
   constructor(props) {
@@ -152,28 +150,26 @@ class Learn extends React.Component {
         <button className={styles.lang} onClick={this.toggleLang}>
           {this.state.lang}
         </button>
-        <p className={styles.currentWord}>
-          {this.state.isLoading ? (
-            <FontAwesomeIcon icon={faSpinner} size="3x" pulse />
-          ) : this.state.currentWord ? (
-            this.state.currentWord[this.state.lang]
-          ) : (
-            "Nie masz nic do nauki"
-          )}
-        </p>
-        <input
-          autoFocus
-          id="userAnswer"
-          value={this.state.answer}
-          type="text"
-          autoComplete="off"
-          className={this.state.wrongAnswer ? styles.err : null}
-          onChange={this.handleChange}
-          onKeyPress={this.handleKeyPress}
-        />
-        <button className="mainButton" onClick={this.compareValue}>
-          {this.state.bottomButtonTxt}
-        </button>
+        <Loader isLoading={this.state.isLoading}>
+          <p className={styles.currentWord}>
+            {this.state.currentWord
+              ? this.state.currentWord[this.state.lang]
+              : "Nie masz nic do nauki"}
+          </p>
+          <input
+            autoFocus
+            id="userAnswer"
+            value={this.state.answer}
+            type="text"
+            autoComplete="off"
+            className={this.state.wrongAnswer ? styles.err : null}
+            onChange={this.handleChange}
+            onKeyPress={this.handleKeyPress}
+          />
+          <button className="mainButton" onClick={this.compareValue}>
+            {this.state.bottomButtonTxt}
+          </button>
+        </Loader>
       </div>
     );
   }
