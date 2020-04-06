@@ -3,6 +3,7 @@
   text-align: center;
   font-size: 32px;
   text-transform: uppercase;
+  margin-top: 40px;
   margin-bottom: 20px;
 }
 
@@ -14,6 +15,8 @@
   border: 2px solid palevioletred;
   border-radius: 50%;
   align-self: flex-end;
+  position: absolute;
+  top: 30px;
   margin-top: 0px;
   margin-bottom: 70px;
 }
