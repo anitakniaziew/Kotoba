@@ -2,6 +2,9 @@ import React from "react";
 import styles from "./Learn.module.css";
 import Hiragana from "./hiragana";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+
 class Learn extends React.Component {
   constructor(props) {
     super(props);
@@ -150,11 +153,13 @@ class Learn extends React.Component {
           {this.state.lang}
         </button>
         <p className={styles.currentWord}>
-          {this.state.isLoading
-            ? "Ładowanie"
-            : this.state.currentWord
-            ? this.state.currentWord[this.state.lang]
-            : "Nie masz nic do nauki"}
+          {this.state.isLoading ? (
+            <FontAwesomeIcon icon={faSpinner} size="3x" pulse />
+          ) : this.state.currentWord ? (
+            this.state.currentWord[this.state.lang]
+          ) : (
+            "Nie masz nic do nauki"
+          )}
         </p>
         <input
           autoFocus
