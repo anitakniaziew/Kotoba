@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Learn.module.css";
 import Hiragana from "./hiragana";
 import Loader from "./Loader";
+import LearnForm from "./LearnForm";
 
 class Learn extends React.Component {
   constructor(props) {
@@ -147,28 +148,30 @@ class Learn extends React.Component {
   render() {
     return (
       <div className="wrapper">
-        <button className={styles.lang} onClick={this.toggleLang}>
-          {this.state.lang}
-        </button>
         <Loader isLoading={this.state.isLoading}>
-          <p className={styles.currentWord}>
-            {this.state.currentWord
-              ? this.state.currentWord[this.state.lang]
-              : "Nie masz nic do nauki"}
-          </p>
-          <input
-            autoFocus
-            id="userAnswer"
-            value={this.state.answer}
-            type="text"
-            autoComplete="off"
-            className={this.state.wrongAnswer ? styles.err : null}
-            onChange={this.handleChange}
-            onKeyPress={this.handleKeyPress}
-          />
-          <button className="mainButton" onClick={this.compareValue}>
-            {this.state.bottomButtonTxt}
-          </button>
+          <LearnForm currentWord={this.state.currentWord}>
+            <button className={styles.lang} onClick={this.toggleLang}>
+              {this.state.lang}
+            </button>
+            <p className="currentWord">
+              {this.state.currentWord
+                ? this.state.currentWord[this.state.lang]
+                : null}
+            </p>
+            <input
+              autoFocus
+              id="userAnswer"
+              value={this.state.answer}
+              type="text"
+              autoComplete="off"
+              className={this.state.wrongAnswer ? styles.err : null}
+              onChange={this.handleChange}
+              onKeyPress={this.handleKeyPress}
+            />
+            <button className="mainButton" onClick={this.compareValue}>
+              {this.state.bottomButtonTxt}
+            </button>
+          </LearnForm>
         </Loader>
       </div>
     );

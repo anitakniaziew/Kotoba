@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./Home.module.css";
+import Loader from "./Loader";
 
 class Home extends React.Component {
   constructor(props) {
@@ -8,7 +9,8 @@ class Home extends React.Component {
     this.state = {
       beingLearned: null,
       toReview: null,
-      toLearn: null
+      toLearn: null,
+      isLoading: true
     };
   }
   async phrasesToReview() {
@@ -27,7 +29,8 @@ class Home extends React.Component {
         this.setState({
           toReview: response.data.phrasesToReview,
           beingLearned: response.data.phrasesBeingLearned,
-          toLearn: response.data.phrasesToLearn
+          toLearn: response.data.phrasesToLearn,
+          isLoading: false
         });
       })
       .catch(err => console.log(err));
@@ -41,27 +44,29 @@ class Home extends React.Component {
     return (
       <div className="wrapper">
         <main className={styles.main}>
-          <h1 className={styles.greater}>
-            Cześć, {this.props.currentUser.displayName}!
-          </h1>
-          <table>
-            <tr>
-              <td>Słówka do powtórzenia</td>
-              <Link to="/review">
-                <td className={styles.num}>{this.state.toReview}</td>
-              </Link>
-            </tr>
-            <tr>
-              <td>Słówka nauczone</td>
-              <td className={styles.num}>{this.state.beingLearned}</td>
-            </tr>
-            <tr>
-              <td>Słówka do nauki</td>
-              <Link to="/learn">
-                <td className={styles.num}>{this.state.toLearn}</td>
-              </Link>
-            </tr>
-          </table>
+          <Loader isLoading={this.state.isLoading}>
+            <h1 className={styles.greater}>
+              Cześć, {this.props.currentUser.displayName}!
+            </h1>
+            <table>
+              <tr>
+                <td>Słówka do powtórzenia</td>
+                <Link to="/review">
+                  <td className={styles.num}>{this.state.toReview}</td>
+                </Link>
+              </tr>
+              <tr>
+                <td>Słówka nauczone</td>
+                <td className={styles.num}>{this.state.beingLearned}</td>
+              </tr>
+              <tr>
+                <td>Słówka do nauki</td>
+                <Link to="/learn">
+                  <td className={styles.num}>{this.state.toLearn}</td>
+                </Link>
+              </tr>
+            </table>
+          </Loader>
         </main>
       </div>
     );

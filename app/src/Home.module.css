@@ -6,6 +6,7 @@
 .greater {
   color: palevioletred;
   margin-bottom: 40px;
+  font-weight: 500;
 }
 
 td {
@@ -20,4 +21,3 @@ td {
 .num {
   text-align: center;
 }
-
