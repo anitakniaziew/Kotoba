@@ -51,9 +51,7 @@ class Home extends React.Component {
             <table>
               <tr>
                 <td>Słówka do powtórzenia</td>
-                <Link to="/review">
-                  <td className={styles.num}>{this.state.toReview}</td>
-                </Link>
+                <td className={styles.num}>{this.state.toReview}</td>
               </tr>
               <tr>
                 <td>Słówka nauczone</td>
@@ -61,9 +59,7 @@ class Home extends React.Component {
               </tr>
               <tr>
                 <td>Słówka do nauki</td>
-                <Link to="/learn">
-                  <td className={styles.num}>{this.state.toLearn}</td>
-                </Link>
+                <td className={styles.num}>{this.state.toLearn}</td>
               </tr>
             </table>
           </Loader>
