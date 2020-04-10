@@ -32,3 +32,41 @@ nav {
     font-size: 8px;
     font-weight: 200;
   }
+
+
+  @media (min-width: 700px) {
+    nav {
+      background-color: lightpink;
+      color: white;
+      height: 4.2em;
+      padding: 0.9em;
+      font-size: 0.8em;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-around;
+      position: absolute;
+      top: 0px;
+      width: 100%;
+    }
+
+    a, .logOut {
+      display: flex;
+      justify-content: space-around;
+      padding: 0.2em;
+    }
+
+    .navButton{
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .icon {
+      width: 10%;
+      margin-right: 0.3em;
+    }
+
+    nav h1 {
+      margin: 0;
+      padding: 0.4em;
+    }
+  } 

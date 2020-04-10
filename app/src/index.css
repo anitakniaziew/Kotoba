@@ -66,5 +66,19 @@ button {
 }
 
 
+@media (min-width: 700px) {
+  .wrapper {
+    margin-top: 53px;
+    width: 80%;
+  }
 
+  input {
+    width: 46%;
+    margin-top: 30px;
+  }
 
+  .mainButton {
+    width: 46%;
+    margin-top: 40px;
+  }
+}

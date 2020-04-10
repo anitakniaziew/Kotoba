@@ -16,23 +16,35 @@ class Nav extends React.Component {
     return (
       <nav>
         <Link to="/">
-          <FontAwesomeIcon icon={faHome} size="2x" />
+          <FontAwesomeIcon className={styles.icon} icon={faHome} size="2x" />
           <h1 className={styles.navButton}>Start</h1>
         </Link>
         <Link to="/learn">
-          <FontAwesomeIcon icon={faUserGraduate} size="2x" />
+          <FontAwesomeIcon
+            className={styles.icon}
+            icon={faUserGraduate}
+            size="2x"
+          />
           <h1 className={styles.navButton}>Ucz się</h1>
         </Link>
         <Link to="/review">
-          <FontAwesomeIcon icon={faBookReader} size="2x" />
+          <FontAwesomeIcon
+            className={styles.icon}
+            icon={faBookReader}
+            size="2x"
+          />
           <h1 className={styles.navButton}>Powtarzaj</h1>
         </Link>
         <Link to="/admin">
-          <FontAwesomeIcon icon={faBook} size="2x" />
+          <FontAwesomeIcon className={styles.icon} icon={faBook} size="2x" />
           <h1 className={styles.navButton}>Dodaj słowa</h1>
         </Link>
         <button className={styles.logOut} onClick={() => this.props.signOut()}>
-          <FontAwesomeIcon icon={faDoorOpen} size="2x" />
+          <FontAwesomeIcon
+            className={styles.icon}
+            icon={faDoorOpen}
+            size="2x"
+          />
           <h1 className={styles.navButton}>Wyloguj</h1>
         </button>
       </nav>

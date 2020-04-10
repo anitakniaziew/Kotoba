@@ -36,3 +36,9 @@
   90% { margin-right: -0.1rem; }
   100% { margin-right: 0rem; }
 }
+
+@media (min-width: 700px) {
+  .lang {
+    top: 120px;
+  }
+}
